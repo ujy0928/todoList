@@ -29,8 +29,10 @@ completeBtn.addEventListener("click", e => {
 // 수정 버튼 
 const updateBtn = document.querySelector("#updateBtn");
 updateBtn.addEventListener("click", e => {
+  // data- 속성을 사용해서 todoNo값 가져옴
   const todoNo = e.target.dataset.todoNo;
 
+  // 수정 컨트롤러 GET방식으로 호출
   location.href = `/todo/update?todoNo=${todoNo}`;
 });
 
@@ -38,8 +40,9 @@ updateBtn.addEventListener("click", e => {
 // 삭제 버튼
 const deleteBtn = document.querySelector("#deleteBtn");
 deleteBtn.addEventListener("click", e => {
+  // data- 속성을 사용해서 todoNo값 가져옴
   const todoNo = e.target.dataset.todoNo;
 
-  //console.log(todoNo);
+  // 삭제 컨트롤러 GET방식으로 호출
   location.href = `/todo/delete?todoNo=${todoNo}`;
 });

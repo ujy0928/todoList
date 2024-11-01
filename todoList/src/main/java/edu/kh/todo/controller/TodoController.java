@@ -119,10 +119,13 @@ public class TodoController {
 	public String delete(@RequestParam("todoNo") int todoNo,
 						RedirectAttributes ra) {
 		
+		// 할 일 삭제 서비스 호출
 		int result = service.deleteTodo(todoNo);
 		
 		String message = null;
 		String path = null;
+		
+		// 삭제 성공시 main, 실패시 detail 호출을 위한 path 설정
 		if(result > 0) {
 			message = "삭제 성공!!";
 			path = "/";
@@ -131,6 +134,7 @@ public class TodoController {
 			path = "detail?todoNo=" + todoNo;
 		}
 		
+		// 메시지 1회성 사용을 위한 셋
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:" + path;
@@ -140,12 +144,13 @@ public class TodoController {
 	public String update(@RequestParam("todoNo") int todoNo
 						, Model model) {
 		
-		// update에서 사용할 세부 정보 로드
+		// update에서 사용할 세부 정보 서비스 호출
 		Todo todo = service.todoDetail(todoNo);
 		
+		// update페이지에서 사용할 todo객체 값 넘김
 		model.addAttribute("todo", todo);
 	
-		
+		// update페이지로 forward
 		return "todo/update";	
 	}
 	
@@ -161,7 +166,7 @@ public class TodoController {
 		String message = null;
 		String path = null;
 
-		// 수정성공시 main으로, 실패시 update 호출
+		// 수정성공시 main으로, 실패시 update 호출을 위한 path 설정
 		if(result > 0) {
 			message = "수정 성공!!";
 			path = "/";
@@ -170,6 +175,7 @@ public class TodoController {
 			path = "update?todoNo=" + todoNo;
 		}
 		
+		// 메시지 1회성 사용을 위한 셋
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:" + path;		
